@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ai-payment-investigator
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: qwen3:8b
+        temperature: 0.2
