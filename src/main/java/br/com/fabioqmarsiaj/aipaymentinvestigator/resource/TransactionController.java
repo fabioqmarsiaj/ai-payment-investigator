@@ -1,5 +1,6 @@
 package br.com.fabioqmarsiaj.aipaymentinvestigator.resource;
 
+import br.com.fabioqmarsiaj.aipaymentinvestigator.domain.TransactionInvestigation;
 import br.com.fabioqmarsiaj.aipaymentinvestigator.service.TransactionInvestigator;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}/investigate")
-    public String investigate(@PathVariable String id) {
+    public TransactionInvestigation investigate(@PathVariable String id) {
         return investigator.investigate(id);
     }
 }

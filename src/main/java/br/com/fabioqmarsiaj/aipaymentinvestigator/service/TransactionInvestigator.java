@@ -1,6 +1,7 @@
 package br.com.fabioqmarsiaj.aipaymentinvestigator.service;
 
 import br.com.fabioqmarsiaj.aipaymentinvestigator.domain.Transaction;
+import br.com.fabioqmarsiaj.aipaymentinvestigator.domain.TransactionInvestigation;
 import br.com.fabioqmarsiaj.aipaymentinvestigator.repository.TransactionRepository;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class TransactionInvestigator {
         this.repository = repository;
     }
 
-    public String investigate(String transactionId) {
+    public TransactionInvestigation investigate(String transactionId) {
         Transaction transaction = repository
                 .findById(transactionId)
                 .orElseThrow();
@@ -50,6 +51,9 @@ public class TransactionInvestigator {
                         transaction.messageType()
                 ))
                 .call()
-                .content();
+                .entity(
+                        TransactionInvestigation.class,
+                        ChatClient.EntityParamSpec::validateSchema
+                );
     }
 }
